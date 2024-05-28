@@ -1,57 +1,65 @@
 import random
+recommencer = "1"
+while recommencer == "1":
+    vie_joueur = 50
+    vie_ennemi = 50
+    #nombre_potion_ennemi = 3
+    nombre_potion_joueur = 3
+    nombre_attaque_joueur = 6
+    nombre_attaque_ennemi = 6
+    #boucle principale
+    while vie_joueur > 0 and vie_ennemi > 0:
 
-vie_joueur = 50
-vie_ennemi = 50
-nombre_potion_ennemi = 3
-nombre_potion_joueur = 3
-nombre_attaque_joueur = 6
-nombre_attaque_ennemi = 6
-#boucle principale
-while vie_joueur > 0 and vie_ennemi > 0:
+        attaque_joueur = random.randint(5, 15)
+        attaque_ennemi = random.randint(5, 10)
+        potion_vie = random.randint(15, 50)
+        potion_ennemi = random.randint(15, 45)
+    #boucle joueur
+        entre_principale = input("Souhaitez-vous attaquer (1) ou utiliser une potion (2) ? ")
+        if entre_principale == "1":
+            if nombre_attaque_joueur > 0:
+                nombre_attaque_joueur -= 1
+                vie_ennemi -= attaque_joueur
+                print(f" Il reste à l'ennemi {vie_ennemi} de vie !")
+            else:
+                print("Vous n'avez plus de possibilité d'attaquer ! ")
 
-    attaque_joueur = random.randint(5, 10)
-    attaque_ennemi = random.randint(5, 15)
-    potion_vie = random.randint(15, 50)
-    potion_ennemi = random.randint(15, 45)
-#boucle joueur
-    entre_principale = input("Souhaitez-vous attaquer (1) ou utiliser une potion (2) ? ")
-    if entre_principale == "1":
-        if nombre_attaque_joueur > 0:
-            nombre_attaque_joueur -= 1
-            vie_ennemi = (vie_ennemi - attaque_joueur)
-            print(vie_ennemi)
-        else:
-            print("Vous n'avez plus de possibilité d'attaquer ! ")
+        elif entre_principale == "2":
+            if nombre_potion_joueur > 0:
+                nombre_potion_joueur -= 1
+                vie_joueur += potion_vie
+                print(f" Vous avez {vie_joueur} de vie, il vous reste {nombre_potion_joueur} potion(s) !")
+            else:
+                print("Vous n'avez plus de potion")
 
-    elif entre_principale == "2":
-        if nombre_potion_joueur > 0:
-            nombre_potion_joueur -= 1
-            vie_joueur = (vie_joueur + potion_vie)
-            print(vie_joueur)
-        else:
-            print("Vous n'avez plus de potion")
+    #Vérification victoire
+        if vie_ennemi <= 0:
+            print("Bravo,Vous avez gagné")
+            break
+    # recommencer = input("voulez-vous recommencer (1) ou non (2) ? ")
+    # if recommencer == "2":
+    #     print("Merci et aurevoir")
+    #entré ennemi
+        if random.choice(["attaque", "potion"]) == "attaque":
+            if nombre_attaque_ennemi > 0:
+                nombre_attaque_ennemi -= 1
+                vie_joueur -= attaque_ennemi
+                print(f" Il vous reste {vie_joueur} de vie !")
+            else:
+                print(" l'ennemi ne peut plus attaquer")
 
-#Vérification victoire
-    if vie_ennemi <= 0:
-        print("Bravo,Vous avez gagné")
-        break
-#entré ennemi
-    if random.choice(["attaque", "potion"]) == "attaque":
-        if nombre_attaque_ennemi > 0:
-            nombre_attaque_ennemi -= 1
-            vie_joueur -= attaque_ennemi
-            print(vie_joueur)
-        else:
-            print(" l'ennemi ne peut plus attaquer")
-    else:
-        if nombre_potion_ennemi > 0:
-            nombre_potion_ennemi -= 1
-            vie_ennemi += potion_ennemi
-            print(vie_ennemi)
-        else:
-            print("l'ennemi n'a plus de potion")
+        # else:
+        #     if nombre_potion_ennemi > 0:
+        #         nombre_potion_ennemi -= 1
+        #         vie_ennemi += potion_ennemi
+        #         print(f" il reste {vie_joueur} de vie et il lui reste {nombre_potion_ennemi} potion(s)!")
+        #     else:
+        #         print("l'ennemi n'a plus de potion")
 
-    #vérification victoire
-    if vie_joueur <= 0:
-        print("vous avez perdu")
-        break
+        #vérification victoire
+        if vie_joueur <= 0:
+            print("vous avez perdu")
+            break
+    recommencer = input("voulez-vous recommencer (1) ou non (2) ? ")
+    if recommencer == "2":
+        print("Merci et aurevoir")
